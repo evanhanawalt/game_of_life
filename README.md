@@ -1,1 +1,1 @@
-"# game_of_life" >> README.md
+# game_of_life
