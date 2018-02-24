@@ -4,12 +4,27 @@
 <head>
 	<title>Page Title</title>
 	<meta charset="UTF-8">
+	<script src="jquery-3.3.1.min.js"></script>
 	<script src="game-board.js"></script>
 	<script src="game-of-life.js"></script>
+	
+	<style>
+	td {
+		background-color:#c7c7c7;
+		height: 5px;
+		width: 5px;
+	}
+	td[data-alive=true] {
+		background-color: #ff0000;
+	}
+	</style>
+
 </head>
 
 <body>
+	<table id="board">
 
+	</table>
 </body>
 
 </html> 
