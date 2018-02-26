@@ -13,15 +13,11 @@ basic user instructions:
 
 buttons:
 
-	">" will iterate the game 1 generation.
-
-	"Start" will start the game.
-
-	"Stop" will stop the game.
-
-	"Clear" will stop the game and kill all live cells.
-
-	"Resize" will stop the game and change your game board to the new dimensions.
+	* ">" will iterate the game 1 generation.
+	* "Start" will start the game.
+	* "Stop" will stop the game.
+	* "Clear" will stop the game and kill all live cells.
+	* "Resize" will stop the game and change your game board to the new dimensions.
 
 
 how to test:
@@ -30,10 +26,10 @@ how to test:
 
 
 features:
-* both manual iterating and free running game
-* html GUI
-* board clearing
-* board resizing
+	* both manual iterating and free running game
+	* html GUI
+	* board clearing
+	* board resizing
 
 
 discussion:
