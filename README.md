@@ -1,19 +1,29 @@
 Game of Life
+
 author: Evan Hanawalt
 
 how to run:
 To run the program, open view.html in your web browser. (i tested using firefox)
 
 basic user instructions:
+
 To mark cells as alive, click on them, live cells will display as red.
+
 buttons:
+
 ">" will iterate the game 1 generation.
+
 "Start" will start the game.
+
 "Stop" will stop the game.
+
 "Clear" will stop the game and kill all live cells.
+
 "Resize" will stop the game and change your game board to the new dimensions.
 
+
 how to test:
+
 To run unit tests, open tests.html in your web browser.
 
 
@@ -25,6 +35,7 @@ features:
 
 
 discussion:
+	
 	First I designed the GameBoard class to model the game's data and implement 
 	its updating algorithm to separte the data model from the UI. Next, in 
 	game-of-life.js I wrote the controller to insert an html table that would 
