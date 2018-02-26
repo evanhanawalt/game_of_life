@@ -73,6 +73,11 @@ $(document).ready(function(){
 	//'clear' on click listener
 	$('#button-clear').click(function(){
 		//create new board and update view
+		if(isRunning){
+			clearInterval(timerID);
+			isRunning = false;
+			updateIsRunningButton();
+		}
 		board = new GameBoard(rows,columns);
 		updateBoardHtml();
 	});
