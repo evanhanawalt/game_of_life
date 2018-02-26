@@ -26,6 +26,7 @@ how to test:
 
 
 features:
+
 	* both manual iterating and free running game
 	* html GUI
 	* board clearing
