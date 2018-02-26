@@ -1,9 +1,21 @@
+/*
+game-of-life.js includes functionality for user interface interactions 
+and connects the UI with the GameBoard class which models the game's data
+author: Evan Hanawalt
+*/
+
+
+
 var rows = 20;
 var columns = 20;
 var board = new GameBoard(rows,columns);
 var isRunning = false;
 var timerID;
 
+/*
+createBoardHtml creates a new board to insert into the UI 
+based on the data in the board variable, also used for resizing
+*/
 function createBoardHtml(){
 	var table = '';
 	for (var i = 0; i < board.rows; i++){
@@ -20,6 +32,10 @@ function createBoardHtml(){
 	$('#board').html(table);
 }
 
+/*
+setCellOnClickListeners sets the listener which toggles cells alive/dead it is 
+a separate function so that it can set new listeners when the board is resized
+*/
 function setCellOnClickListeners(){
 	$('td').click(function(){
 		if (!isRunning){
@@ -35,7 +51,9 @@ function setCellOnClickListeners(){
 		}
 	});
 }
-
+/*
+updates the board html to match the data model
+*/
 function updateBoardHtml(){
 	for (var i = 0; i < board.rows; i++){
 		for (var j = 0; j < board.columns; j++){
@@ -44,6 +62,9 @@ function updateBoardHtml(){
 	}
 }
 
+/*
+updates the start stop button html
+*/
 function updateIsRunningButton(){
 	if (isRunning){
 		$('#button-start-stop').html('Stop');
@@ -52,22 +73,21 @@ function updateIsRunningButton(){
 	}
 }
 
+/*
+iterates 1 generation of game and updates view
+*/
 function iterateGame(){
 	board.update();
 	updateBoardHtml();
 }
-board.update();
+
 
 //main script
 $(document).ready(function(){
 	
-	//create board of correct dimensions
 	createBoardHtml();
-
 	
 	//set on click listens for all buttons
-
-	//cell on click listener, toggles alive or dead
 	setCellOnClickListeners();
 
 	//'clear' on click listener
@@ -98,20 +118,21 @@ $(document).ready(function(){
 		isRunning = !isRunning;
 		updateIsRunningButton();
 	})
-		
+
+	//'resize' on click listener
 	$('form#form-resize').submit(function( event ) {
+		//stop if game is running
 		if(isRunning){
 			clearInterval(timerID);
 			isRunning = false;
 			updateIsRunningButton();
 		}
-
+		//get new dimensions and create new board
 		rows = parseInt($('input[name="rows"]' ).val());
 		columns = parseInt($('input[name="columns"]').val());
-		console.log('rows' + rows);
-		console.log('columns' + columns);
 		board = new GameBoard(rows, columns, board);
 		createBoardHtml();
+		//set listeners for new cells
 		setCellOnClickListeners();
 		// prevents resetting page
 		event.preventDefault();

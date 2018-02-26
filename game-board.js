@@ -1,6 +1,12 @@
+/*	
+The GameBoard class models the data from the game of life,including a getter/setter 
+for cell status, and how to create, resize, and update the board according to 
+the rules of the game.
+author: Evan Hanawalt
+*/
 class GameBoard {
 	/*
-	builds a 2D array of size (rows, columns)
+	builds a 2D array of size (rows, columns), can inherit living cells from optional previous board
 	*/
 	constructor(rows = 6, columns = 8, prevBoard = null){
 		this.columns = columns;
@@ -12,7 +18,7 @@ class GameBoard {
 				this.board[i].push(false);
 			}
 		}
-
+		//if cells are being inherited, set correct cells to living (within resized bounds)
 		if (prevBoard!=null) {
 			for (var i = 0; i < this.rows && i < prevBoard.rows; i++){
 				for (var j = 0; j < this.columns && j < prevBoard.columns; j++){
@@ -34,7 +40,7 @@ class GameBoard {
 		return this.board[row][column];
 	}
 	/*
-	returns a count of how many neightbors are alive to the cell at (row, column)
+	returns a count of how many neighbors are alive to the cell at (row, column)
 	*/
 	numberOfLivingNeighbors(row, column){
 		var count = 0;
