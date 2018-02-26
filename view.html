@@ -9,8 +9,12 @@
 	<script src="game-of-life.js"></script>
 	
 	<style>
-
-
+	html {
+		font-family: sans-serif;
+	}
+	input[type="number"] {
+		width: 30px;
+	}
 	td {
 		background-color: #c7c7c7;
 		height: 10px;
@@ -20,19 +24,29 @@
 	td[data-alive=true] {
 		background-color: #ff0000;
 	}
+	input {
+
+	}
 	</style>
 
 </head>
 
 <body>
-	<div id="container">
-		<table id="board">
-		</table>
-		<button id="button-start-stop">Start</button>
-		<button id="button-update-once">></button>
-		<button id="button-clear">Clear</button>
-		<button id="button-resize">Resize</button>
-	</div>
+
+	<table id="board">
+	</table>
+	<button id="button-start-stop">Start</button>
+	<button id="button-update-once">></button>
+	<button id="button-clear">Clear</button>
+	
+	<form id='form-resize'>
+		<div>
+			Rows: <input name="rows" type="number" min="0" max="50" value="20">
+			Columns: <input name="columns" type="number" min="0" max="50" value="20">
+			<input type="submit" value="Resize">
+		</div>
+	</form>
+	
 </body>
 
 </html> 

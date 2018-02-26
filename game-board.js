@@ -2,7 +2,7 @@ class GameBoard {
 	/*
 	builds a 2D array of size (rows, columns)
 	*/
-	constructor(rows = 6, columns = 8){
+	constructor(rows = 6, columns = 8, prevBoard = null){
 		this.columns = columns;
 		this.rows = rows;
 		this.board = [];
@@ -10,6 +10,14 @@ class GameBoard {
 			this.board.push([]);
 			for (var j = 0; j < this.columns; j++){
 				this.board[i].push(false);
+			}
+		}
+
+		if (prevBoard!=null) {
+			for (var i = 0; i < this.rows && i < prevBoard.rows; i++){
+				for (var j = 0; j < this.columns && j < prevBoard.columns; j++){
+					this.set(i,j,prevBoard.get(i,j));
+				}
 			}
 		}
 	}
@@ -84,18 +92,4 @@ class GameBoard {
 		this.board = newBoard;
 	}
 
-
-	printBoard(){
-		
-		for (var i = 0; i < this.rows; i++){
-			var line = ''
-			for (var j = 0; j < this.columns; j++){
-				line += String(this.board[i][j]) + ',';
-			}
-			console.log(line)
-			console.log('');
-
-		}
-
-	}
 }

@@ -4,11 +4,6 @@ var board = new GameBoard(rows,columns);
 var isRunning = false;
 var timerID;
 
-board.set(0,1,true);
-board.set(1,1,true);
-board.set(2,1,true);
-
-
 function createBoardHtml(){
 	var table = '';
 	for (var i = 0; i < board.rows; i++){
@@ -22,7 +17,23 @@ function createBoardHtml(){
 		}
 		table += '</tr>';
 	}
-	$('#board').append(table);
+	$('#board').html(table);
+}
+
+function setCellOnClickListeners(){
+	$('td').click(function(){
+		if (!isRunning){
+			console.log($(this).attr('id'));
+			var rowAndColumn = $(this).attr('id').split('-');
+			var row = parseInt(rowAndColumn[0]);
+			var column = parseInt(rowAndColumn[1]);
+			console.log(row);
+			console.log(column);
+			//updates board data and view
+			board.set(row, column, !board.get(row,column));
+			updateBoardHtml();
+		}
+	});
 }
 
 function updateBoardHtml(){
@@ -41,50 +52,65 @@ function updateIsRunningButton(){
 	}
 }
 
-function runGame(){
+function iterateGame(){
 	board.update();
 	updateBoardHtml();
 }
 board.update();
+
+//main script
 $(document).ready(function(){
 	
+	//create board of correct dimensions
 	createBoardHtml();
 
-	//Set on click listens for all buttons
+	
+	//set on click listens for all buttons
 
-	$('td').click(function(){
-		console.log($(this).attr('id'));
-		var rowAndColumn = $(this).attr('id').split('-');
-		var row = parseInt(rowAndColumn[0]);
-		var column = parseInt(rowAndColumn[1]);
-		console.log(row);
-		console.log(column);
-		//updates board data and view
-		board.set(row, column, !board.get(row,column));
-		updateBoardHtml();
-	});
+	//cell on click listener, toggles alive or dead
+	setCellOnClickListeners();
 
+	//'clear' on click listener
 	$('#button-clear').click(function(){
 		//create new board and update view
 		board = new GameBoard(rows,columns);
 		updateBoardHtml();
 	});
 
+	//'>' on click listener
 	$('#button-update-once').click(function(){
 		//iterate game and update view
-		runGame()
+		iterateGame()
 	})
 
+	//'start/stop' on click listener
 	$('#button-start-stop').click(function(){
 		if(isRunning){
 			clearInterval(timerID);
 		} else {
-			timerID = setInterval(runGame, 300);
+			timerID = setInterval(iterateGame, 500);
 		}
 		isRunning = !isRunning;
 		updateIsRunningButton();
 	})
+		
+	$('form#form-resize').submit(function( event ) {
+		if(isRunning){
+			clearInterval(timerID);
+			isRunning = false;
+			updateIsRunningButton();
+		}
 
+		rows = parseInt($('input[name="rows"]' ).val());
+		columns = parseInt($('input[name="columns"]').val());
+		console.log('rows' + rows);
+		console.log('columns' + columns);
+		board = new GameBoard(rows, columns, board);
+		createBoardHtml();
+		setCellOnClickListeners();
+		// prevents resetting page
+		event.preventDefault();
+	});
 
 });
 
