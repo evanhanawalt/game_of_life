@@ -69,7 +69,6 @@ class GameBoard {
 			newBoard.push([]);
 			for (var j = 0; j < this.columns; j++){
 				var liveNeighbors = this.numberOfLivingNeighbors(i,j);
-				console.log("liveNeighbors: " + liveNeighbors);
 				if (liveNeighbors < 2){
 					//this.set(i,j,false);
 					newBoard[i].push(false);

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,10 +9,13 @@
 	<script src="game-of-life.js"></script>
 	
 	<style>
+
+
 	td {
-		background-color:#c7c7c7;
-		height: 5px;
-		width: 5px;
+		background-color: #c7c7c7;
+		height: 10px;
+		width: 10px; 
+		cursor: pointer;
 	}
 	td[data-alive=true] {
 		background-color: #ff0000;
@@ -22,9 +25,14 @@
 </head>
 
 <body>
-	<table id="board">
-
-	</table>
+	<div id="container">
+		<table id="board">
+		</table>
+		<button id="button-start-stop">Start</button>
+		<button id="button-update-once">></button>
+		<button id="button-clear">Clear</button>
+		<button id="button-resize">Resize</button>
+	</div>
 </body>
 
 </html> 
